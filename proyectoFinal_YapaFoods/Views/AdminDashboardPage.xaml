@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:vm="clr-namespace:proyectoFinal_YapaFoods.ViewModels"
+            xmlns:models="clr-namespace:proyectoFinal_YapaFoods.Models"
+            x:Class="proyectoFinal_YapaFoods.Views.AdminDashboardPage"
+            Title="Panel Admin"
+            BarBackgroundColor="#D32F2F"
+            BarTextColor="White"
+            SelectedTabColor="White"
+            UnselectedTabColor="#FFCDD2">
+
+    <ContentPage Title="Pendientes" BackgroundColor="#F5F5F5">
+        <CollectionView ItemsSource="{Binding Pendientes}" Margin="10">
+            <CollectionView.EmptyView>
+                <Label Text="No hay locales pendientes" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Local">
+                    <Frame Margin="0,5" Padding="15" CornerRadius="10">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Nombre}" FontSize="18" FontAttributes="Bold" TextColor="#333"/>
+                            <Label Text="{Binding Contacto}" TextColor="Gray"/>
+                            <Button Text="APROBAR" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AdminLocalesViewModel}}, Path=AprobarCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#4CAF50"
+                                    Margin="0,10,0,0"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage>
+
+    <ContentPage Title="Activos" BackgroundColor="#F5F5F5">
+        <CollectionView ItemsSource="{Binding Activos}" Margin="10">
+            <CollectionView.EmptyView>
+                <Label Text="No hay locales activos" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Local">
+                    <Frame Margin="0,5" Padding="15" CornerRadius="10">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Nombre}" FontSize="18" TextColor="#333"/>
+                                <Label Text="Activo" TextColor="#4CAF50" FontSize="12"/>
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1" Text="Suspender" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AdminLocalesViewModel}}, Path=SuspenderCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#D32F2F" HeightRequest="40"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage>
+
+    <ContentPage x:Name="TabUsuarios" Title="Usuarios" BackgroundColor="#F5F5F5" IconImageSource="dotnet_bot.png">
+        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy}">
+            <CollectionView ItemsSource="{Binding ListaUsuarios}" Margin="10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Usuario">
+                        <Frame Margin="0,5" Padding="15" CornerRadius="10" BackgroundColor="White" BorderColor="#DDD">
+                            <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
+
+                                <Label Grid.Row="0" Grid.Column="0" 
+                                       Text="{Binding Nombre}" 
+                                       FontAttributes="Bold" FontSize="16" TextColor="#333"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" 
+                                       Text="{Binding Correo}" 
+                                       TextColor="Gray" FontSize="12"/>
+
+                                <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" 
+                                        StrokeShape="RoundRectangle 10"
+                                        BackgroundColor="#FFEBEE"
+                                        Padding="10,5"
+                                        VerticalOptions="Center">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AdminUsersViewModel}}, Path=CambiarRolCommand}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </Border.GestureRecognizers>
+                                    <Label Text="Cambiar Rol" TextColor="#D32F2F" FontSize="12" FontAttributes="Bold"/>
+                                </Border>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </ContentPage>
+
+</TabbedPage>

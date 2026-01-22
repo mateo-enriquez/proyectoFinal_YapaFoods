@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:proyectoFinal_YapaFoods.Models"
+             xmlns:vm="clr-namespace:proyectoFinal_YapaFoods.ViewModels"
+             x:Class="proyectoFinal_YapaFoods.Views.AdminUsersPage"
+             Title="Usuarios">
+
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy}">
+        <CollectionView ItemsSource="{Binding ListaUsuarios}" Margin="10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Usuario">
+                    <Frame Margin="0,5" Padding="15" CornerRadius="10" BackgroundColor="White" BorderColor="#DDD">
+                        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
+
+                            <Label Grid.Row="0" Grid.Column="0" 
+                                   Text="{Binding Nombre}" 
+                                   FontAttributes="Bold" FontSize="16" TextColor="#333"/>
+
+                            <Label Grid.Row="1" Grid.Column="0" 
+                                   Text="{Binding Correo}" 
+                                   TextColor="Gray" FontSize="12"/>
+
+                            <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" 
+                                    StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="#FFEBEE"
+                                    Padding="10,5"
+                                    VerticalOptions="Center">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AdminUsersViewModel}}, Path=CambiarRolCommand}"
+                                                          CommandParameter="{Binding .}"/>
+                                </Border.GestureRecognizers>
+
+                                <Label Text="Cambiar Rol" TextColor="#D32F2F" FontSize="12" FontAttributes="Bold"/>
+                            </Border>
+
+                            <Label Grid.Row="1" Grid.Column="1" 
+                                   Text="{Binding RolId, StringFormat='Rol ID: {0}'}" 
+                                   HorizontalOptions="Center" 
+                                   FontSize="10" TextColor="Gray" Margin="0,5,0,0"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:proyectoFinal_YapaFoods.Models"
+             x:Class="proyectoFinal_YapaFoods.Views.ClientDashboardPage"
+             Title="YapaFoods - Locales"
+             BackgroundColor="#F5F5F5">
+
+    <CollectionView ItemsSource="{Binding LocalesActivos}" Margin="15">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:Local">
+                <Frame Margin="0,8" Padding="15" CornerRadius="15" BorderColor="Transparent">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.VerCatalogoCommand}" CommandParameter="{Binding .}"/>
+                    </Frame.GestureRecognizers>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Nombre}" FontSize="18" FontAttributes="Bold" TextColor="#333"/>
+                            <Label Text="{Binding Horario}" TextColor="Gray" FontSize="12"/>
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1" Text="Ver Menú >" TextColor="#D32F2F" VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

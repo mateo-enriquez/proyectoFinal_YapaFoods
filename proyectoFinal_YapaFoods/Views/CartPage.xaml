@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="proyectoFinal_YapaFoods.Views.CartPage"
+             Title="Mi Carrito"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="*, Auto">
+        <CollectionView Grid.Row="0" ItemsSource="{Binding ItemsCarrito}" Margin="10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="*, Auto, Auto" Padding="10">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Producto.Nombre}" FontAttributes="Bold" TextColor="Black"/>
+                            <Label Text="{Binding Producto.Precio, StringFormat='Unitario: ${0:F2}'}" FontSize="12" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1" Text="{Binding Cantidad, StringFormat='x{0}'}" VerticalOptions="Center" Margin="10,0" TextColor="Black"/>
+                        <Label Grid.Column="2" Text="{Binding Subtotal, StringFormat='${0:F2}'}" FontAttributes="Bold" VerticalOptions="Center" TextColor="#D32F2F"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Frame Grid.Row="1" BackgroundColor="#F5F5F5" Padding="20">
+            <VerticalStackLayout Spacing="10">
+                <Grid>
+                    <Label Text="Total a Pagar:" FontAttributes="Bold" FontSize="18" TextColor="Black"/>
+                    <Label Text="{Binding Total, StringFormat='${0:F2}'}" HorizontalOptions="End" FontAttributes="Bold" FontSize="18" TextColor="#D32F2F"/>
+                </Grid>
+                <Button Text="CONFIRMAR PEDIDO" Command="{Binding CheckoutCommand}" BackgroundColor="#4CAF50" CornerRadius="20"/>
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

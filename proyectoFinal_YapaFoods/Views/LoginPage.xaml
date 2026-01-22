@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:proyectoFinal_YapaFoods.ViewModels"
+             x:Class="proyectoFinal_YapaFoods.Views.LoginPage"
+             Title="Bienvenido a YapaFoods"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+
+            <Image Source="yapafoods.png" 
+                   HeightRequest="150" 
+                   HorizontalOptions="Center" />
+
+            <Label Text="Iniciar Sesión"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#333"/>
+
+            <Entry Placeholder="Correo Electrónico"
+                   Text="{Binding Correo}"
+                   Keyboard="Email"
+                   BackgroundColor="White"
+                   TextColor="#333333" 
+                   PlaceholderColor="#999999"/>
+
+                        <Entry Placeholder="Contraseña"
+                   Text="{Binding Password}"
+                   IsPassword="True"
+                   BackgroundColor="White"
+                   TextColor="#333333"
+                   PlaceholderColor="#999999"/>
+
+            <Button Text="Olvidé mi contraseña"
+                    Command="{Binding ForgotPasswordCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="#D32F2F"
+                    FontSize="12"/>
+
+            <Button Text="INGRESAR"
+                    Command="{Binding LoginCommand}"
+                    BackgroundColor="#D32F2F"
+                    TextColor="White"
+                    CornerRadius="20"
+                    HeightRequest="50"/>
+
+            <Label Text="¿No tienes cuenta?" 
+                   HorizontalOptions="Center"
+                   TextColor="Gray"/>
+
+            <Button Text="Crear Cuenta Nueva"
+                    Command="{Binding RegisterCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="#D32F2F"
+                    BorderColor="#D32F2F"
+                    BorderWidth="1"
+                    CornerRadius="20"/>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                               IsVisible="{Binding IsBusy}"
+                               Color="#D32F2F"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

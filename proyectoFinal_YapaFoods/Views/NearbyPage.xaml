@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:proyectoFinal_YapaFoods.ViewModels"
+             x:Class="proyectoFinal_YapaFoods.Views.NearbyPage"
+             Title="Cerca de Mí"
+             BackgroundColor="#F5F5F5">
+
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy}">
+        <CollectionView ItemsSource="{Binding LocalesOrdenados}" Margin="15">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" Color="#D32F2F"/>
+                    <Label Text="Buscando ofertas cercanas..." TextColor="Gray" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:LocalCercano">
+                    <Frame Margin="0,8" Padding="15" CornerRadius="15" HasShadow="True" BorderColor="Transparent">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IrAlLocalCommand}" 
+                                CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                <Label Text="{Binding Local.Nombre}" 
+                                       FontSize="18" 
+                                       FontAttributes="Bold" 
+                                       TextColor="#333"/>
+
+                                <Label Text="{Binding Local.DireccionHtml}" 
+                                       MaxLines="1" 
+                                       LineBreakMode="TailTruncation" 
+                                       TextColor="Gray" 
+                                       FontSize="12"/>
+
+                                <Label Text="Toca para ver menú >" 
+                                       TextColor="#D32F2F" 
+                                       FontSize="10"
+                                       Margin="0,5,0,0"/>
+                            </VerticalStackLayout>
+
+                            <Border Grid.Column="1" 
+                                    StrokeShape="RoundRectangle 10" 
+                                    BackgroundColor="#E8F5E9" 
+                                    Padding="12,5" 
+                                    VerticalOptions="Center">
+                                <Label Text="{Binding DistanciaTexto}" 
+                                       TextColor="#2E7D32" 
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

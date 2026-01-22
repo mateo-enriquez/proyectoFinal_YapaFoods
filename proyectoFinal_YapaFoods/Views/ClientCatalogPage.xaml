@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="proyectoFinal_YapaFoods.Views.ClientCatalogPage"
+             Title="Catálogo"
+             BackgroundColor="#F5F5F5">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Ver Carrito" Command="{Binding GoToCartCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto, *">
+        <SearchBar Grid.Row="0" Placeholder="Buscar producto..." 
+                   Text="{Binding SearchText}" 
+                   BackgroundColor="White" 
+                   TextColor="Black" 
+                   PlaceholderColor="Gray"
+                   Margin="10"/>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding ProductosFiltrados}" Margin="10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="0,5" Padding="10" CornerRadius="10">
+                        <Grid ColumnDefinitions="Auto, *, Auto">
+                            <Image Source="{Binding ImagenSvgPath}" WidthRequest="60" HeightRequest="60" Aspect="AspectFit"/>
+
+                            <VerticalStackLayout Grid.Column="1" Margin="10,0" VerticalOptions="Center">
+                                <Label Text="{Binding Nombre}" FontAttributes="Bold" TextColor="#333"/>
+                                <Label Text="{Binding Descripcion}" FontSize="10" TextColor="Gray"/>
+                                <Label Text="{Binding Precio, StringFormat='${0:F2}'}" TextColor="#D32F2F" FontAttributes="Bold"/>
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="2" Text="Agregar" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"
+                                    CommandParameter="{Binding .}"
+                                    FontSize="10" HeightRequest="40" BackgroundColor="#D32F2F"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

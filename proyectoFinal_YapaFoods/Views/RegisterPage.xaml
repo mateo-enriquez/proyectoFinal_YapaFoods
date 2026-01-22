@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="proyectoFinal_YapaFoods.Views.RegisterPage"
+             Title="Registro"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="30" VerticalOptions="Center">
+
+            <Label Text="Crear Cuenta"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="#333"
+                   HorizontalOptions="Center"/>
+
+            <Entry Placeholder="Nombre Completo"
+                   Text="{Binding Nombre}"
+                   TextColor="#333"
+                   BackgroundColor="White"/>
+
+            <Entry Placeholder="Correo Electrónico"
+                   Text="{Binding Correo}"
+                   Keyboard="Email"
+                   TextColor="#333"
+                   BackgroundColor="White"/>
+
+            <Entry Placeholder="Contraseña"
+                   Text="{Binding Password}"
+                   IsPassword="True"
+                   TextColor="#333"
+                   BackgroundColor="White"/>
+
+            <Entry Placeholder="Confirmar Contraseña"
+                   Text="{Binding ConfirmPassword}"
+                   IsPassword="True"
+                   TextColor="#333"
+                   BackgroundColor="White"/>
+
+            <Button Text="REGISTRARSE"
+                    Command="{Binding RegisterCommand}"
+                    BackgroundColor="#D32F2F"
+                    TextColor="White"
+                    CornerRadius="20"
+                    HeightRequest="50"
+                    Margin="0,20,0,0"/>
+
+            <Button Text="Volver al Login"
+                    Command="{Binding LoginCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="Gray"/>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                               IsVisible="{Binding IsBusy}"
+                               Color="#D32F2F"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
