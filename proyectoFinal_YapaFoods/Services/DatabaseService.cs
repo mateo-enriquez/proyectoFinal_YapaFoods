@@ -17,7 +17,7 @@ namespace proyectoFinal_YapaFoods.Services
             if (_database != null)
                 return;
 
-            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "yapafoods_v4.db");
+            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "yapafoods_v5.db");
             _database = new SQLiteAsyncConnection(dbPath);
 
             // Creación de tablas
@@ -81,7 +81,7 @@ namespace proyectoFinal_YapaFoods.Services
                     Nombre = "Usuario Base",
                     Correo = "usuario@yapafoods.com",
                     Password = BCrypt.Net.BCrypt.HashPassword("Yapafoods04"),
-                    RolId = 4, // ID del AdminMaestro
+                    RolId = 4, //Usuario
                     IsVerified = true
                 };
                 await _database.InsertAsync(usuarioBase);

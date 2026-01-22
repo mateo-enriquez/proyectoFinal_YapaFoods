@@ -48,6 +48,8 @@ namespace proyectoFinal_YapaFoods
             builder.Services.AddTransient<ProfileViewModel>();
             builder.Services.AddTransient<ManageProductsViewModel>();
             builder.Services.AddTransient<AddEditProductViewModel>();
+            builder.Services.AddTransient<OwnerOrdersViewModel>();
+            builder.Services.AddSingleton<FoodApiService>();
 
             //Vistas
             builder.Services.AddTransient<LoginPage>();
@@ -60,8 +62,9 @@ namespace proyectoFinal_YapaFoods
             builder.Services.AddTransient<VerificationPage>();
             builder.Services.AddTransient<ForgotPasswordPage>();
             builder.Services.AddTransient<AdminUsersPage>();
-      
-            
+            builder.Services.AddTransient<OwnerOrdersPage>();
+
+
 
             builder.Services.AddTransient<ManageProductsPage>();
             builder.Services.AddTransient<AddEditProductPage>();

@@ -21,6 +21,7 @@ namespace proyectoFinal_YapaFoods
             Routing.RegisterRoute("ClientCatalogPage", typeof(ClientCatalogPage));
             Routing.RegisterRoute("CartPage", typeof(CartPage));
             Routing.RegisterRoute("HistoryPage", typeof(HistoryPage));
+            Routing.RegisterRoute("OwnerOrdersPage", typeof(OwnerOrdersPage));
 
         }
     }

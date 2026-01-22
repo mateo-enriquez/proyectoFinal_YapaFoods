@@ -11,7 +11,8 @@ namespace proyectoFinal_YapaFoods.ViewModels
         public ObservableCollection<Local> MisLocales { get; set; } = new();
         public ICommand LoadCommand { get; }
         public ICommand NuevoLocalCommand { get; }
-        public ICommand ManageProductsCommand { get; }  
+        public ICommand ManageProductsCommand { get; }
+        public ICommand VerPedidosCommand { get; }
 
         // Necesitamos saber qué usuario está logueado. 
         // Por simplicidad, guardaremos el ID temporalmente en una variable estática o servicio de sesión.
@@ -27,6 +28,7 @@ namespace proyectoFinal_YapaFoods.ViewModels
                 if (local == null) return;
                 await Shell.Current.GoToAsync($"ManageProductsPage?localId={local.Id}");
             });
+            VerPedidosCommand = new Command(async () => await Shell.Current.GoToAsync("OwnerOrdersPage"));
         }
 
         public async Task LoadData()

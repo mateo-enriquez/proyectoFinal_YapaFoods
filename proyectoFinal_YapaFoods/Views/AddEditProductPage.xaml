@@ -8,6 +8,14 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
             <Label Text="Detalles del Producto" FontSize="20" FontAttributes="Bold" TextColor="#333"/>
+            <Button Text="✨ Sugerirme un nombre (API)" 
+                    Command="{Binding SugerirComidaCommand}" 
+                    BackgroundColor="#FF9800" 
+                    TextColor="White"
+                    FontSize="12"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    Margin="0,0,0,10"/>
 
             <Label Text="Nombre del Producto" FontSize="12" TextColor="Gray" Margin="0,0,0,-5"/>
             <Entry Placeholder="Ej: Hamburguesa Doble" 

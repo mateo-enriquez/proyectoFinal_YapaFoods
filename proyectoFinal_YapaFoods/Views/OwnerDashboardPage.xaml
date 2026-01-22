@@ -7,8 +7,22 @@
              Title="Panel de Dueño"
              BackgroundColor="#F5F5F5">
 
-    <Grid>
-        <CollectionView ItemsSource="{Binding MisLocales}" Margin="15">
+    <Grid RowDefinitions="Auto, *">
+
+        <Frame Grid.Row="0" Margin="15,15,15,0" Padding="15" BackgroundColor="White" CornerRadius="10" HasShadow="True">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding VerPedidosCommand}"/>
+            </Frame.GestureRecognizers>
+            <Grid ColumnDefinitions="*, Auto">
+                <VerticalStackLayout>
+                    <Label Text="Pedidos Recibidos" FontSize="18" FontAttributes="Bold" TextColor="#333"/>
+                    <Label Text="Toca para ver qué debes preparar" FontSize="12" TextColor="Gray"/>
+                </VerticalStackLayout>
+                <Label Grid.Column="1" Text="Ver >" TextColor="#D32F2F" VerticalOptions="Center" FontAttributes="Bold"/>
+            </Grid>
+        </Frame>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding MisLocales}" Margin="15">
             <CollectionView.EmptyView>
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
                     <Label Text="No tienes locales registrados" TextColor="Gray" FontSize="16"/>
@@ -26,14 +40,8 @@
                         </Frame.GestureRecognizers>
 
                         <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
-                            <Label Grid.Row="0" Grid.Column="0" 
-                                   Text="{Binding Nombre}" 
-                                   FontSize="18" FontAttributes="Bold" TextColor="#333"/>
-
-                            <Label Grid.Row="1" Grid.Column="0" 
-                                   Text="{Binding Estado}" 
-                                   FontSize="12" TextColor="Gray"/>
-
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Nombre}" FontSize="18" FontAttributes="Bold" TextColor="#333"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Estado}" FontSize="12" TextColor="Gray"/>
                             <VerticalStackLayout Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" VerticalOptions="Center">
                                 <Label Text="Gestionar >" TextColor="#D32F2F" FontAttributes="Bold"/>
                                 <Label Text="Productos" TextColor="#D32F2F" FontSize="10" HorizontalOptions="End"/>
@@ -44,7 +52,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Text="+" 
+        <Button Grid.Row="1" Text="+" 
                 Command="{Binding NuevoLocalCommand}"
                 BackgroundColor="#D32F2F" TextColor="White"
                 FontSize="30" CornerRadius="30"

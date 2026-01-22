@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:proyectoFinal_YapaFoods.ViewModels"
+             x:Class="proyectoFinal_YapaFoods.Views.OwnerOrdersPage"
+             Title="Pedidos Recibidos"
+             BackgroundColor="#F5F5F5">
+
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy}">
+        <CollectionView ItemsSource="{Binding MisVentas}" Margin="15">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="No tienes ventas registradas aún." TextColor="Gray"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:VentaItem">
+                    <Frame Margin="0,5" Padding="15" CornerRadius="10" HasShadow="True">
+                        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto, Auto">
+
+                            <Label Grid.Row="0" Grid.Column="0" 
+                                   Text="{Binding LocalNombre}" 
+                                   FontSize="10" TextColor="Gray" FontAttributes="Bold"/>
+
+                            <Label Grid.Row="0" Grid.Column="1" 
+                                   Text="{Binding Fecha, StringFormat='{0:dd/MM HH:mm}'}" 
+                                   FontSize="10" TextColor="Gray" HorizontalOptions="End"/>
+
+                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="{Binding Resumen}" 
+                                   FontSize="16" TextColor="Black" FontAttributes="Bold"
+                                   Margin="0,5"/>
+
+                            <Label Grid.Row="2" Grid.Column="0" 
+                                   Text="{Binding ClienteNombre, StringFormat='Cliente: {0}'}" 
+                                   FontSize="12" TextColor="#333"/>
+
+                            <Border Grid.Row="2" Grid.Column="1" StrokeShape="RoundRectangle 5" BackgroundColor="#E0F2F1" Padding="5,2">
+                                <Label Text="{Binding TotalVenta, StringFormat='Cobrado: ${0:F2}'}" 
+                                       TextColor="#00695C" FontSize="11" FontAttributes="Bold"/>
+                            </Border>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>
