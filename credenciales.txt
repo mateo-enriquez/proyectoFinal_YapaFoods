@@ -1,0 +1,11 @@
+ADMIN
+Correo: admin@yapafoods.com
+Contraseña: Yapafoods04
+
+OWNER
+Correo: owner@test.com
+Contraseña: Owner04
+
+USER
+Correo: user@test.com
+Contraseña: User04
